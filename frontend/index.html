@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TreeVault</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="topbar">
+        <div class="topbar-inner">
+            <a class="logo" onclick="goTo('intro')">
+                <svg viewBox="0 0 32 32" class="logo-svg">
+                    <circle cx="16" cy="6" r="4" fill="#6C5CE7"/>
+                    <line x1="16" y1="10" x2="8" y2="20" stroke="#A29BFE" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="16" y1="10" x2="24" y2="20" stroke="#A29BFE" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="8" cy="22" r="3.5" fill="#00CEC9"/>
+                    <circle cx="24" cy="22" r="3.5" fill="#00CEC9"/>
+                </svg>
+                <span>TreeVault</span>
+            </a>
+            <div class="tabs">
+                <button class="tab active" data-tab="intro" onclick="goTo('intro')">What's This?</button>
+                <button class="tab" data-tab="learn" onclick="goTo('learn')">How It Works</button>
+                <button class="tab" data-tab="play" onclick="goTo('play')">Try It Live</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <main>
+
+        <!-- ======================== -->
+        <!-- SECTION 1: INTRODUCTION  -->
+        <!-- ======================== -->
+        <section id="sec-intro" class="sec visible">
+            <div class="intro-hero">
+                <h1>Ever wondered how your data stays organized?</h1>
+                <p class="subtitle">This app stores student records inside a real AVL Tree — a data structure that automatically keeps itself balanced so every search is lightning fast.</p>
+                <div class="intro-actions">
+                    <button class="btn-main" onclick="goTo('play')">Try it yourself</button>
+                    <button class="btn-ghost" onclick="goTo('learn')">How does it work?</button>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="card card-warn">
+                    <h3>Without balancing</h3>
+                    <p>If you add students 10, 20, 30, 40 in order, a normal tree becomes a straight line. Finding the last student means checking every single one.</p>
+                    <div class="mini-tree">
+                        <svg viewBox="0 0 200 120">
+                            <line x1="30" y1="22" x2="70" y2="48" stroke="#FDCB6E" stroke-width="2.5"/>
+                            <line x1="70" y1="48" x2="110" y2="74" stroke="#FDCB6E" stroke-width="2.5"/>
+                            <line x1="110" y1="74" x2="150" y2="100" stroke="#FDCB6E" stroke-width="2.5"/>
+                            <circle cx="30" cy="20" r="13" fill="#FFF3CD" stroke="#F0C040" stroke-width="2"/><text x="30" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="#856404">10</text>
+                            <circle cx="70" cy="46" r="13" fill="#FFF3CD" stroke="#F0C040" stroke-width="2"/><text x="70" y="50" text-anchor="middle" font-size="11" font-weight="600" fill="#856404">20</text>
+                            <circle cx="110" cy="72" r="13" fill="#FFF3CD" stroke="#F0C040" stroke-width="2"/><text x="110" y="76" text-anchor="middle" font-size="11" font-weight="600" fill="#856404">30</text>
+                            <circle cx="150" cy="98" r="13" fill="#FFF3CD" stroke="#F0C040" stroke-width="2"/><text x="150" y="102" text-anchor="middle" font-size="11" font-weight="600" fill="#856404">40</text>
+                        </svg>
+                    </div>
+                    <p class="small-note">Slow. 4 students = 4 steps to find the last one.</p>
+                </div>
+                <div class="card card-good">
+                    <h3>With AVL balancing</h3>
+                    <p>An AVL Tree rearranges itself automatically. Same 4 students, but now the tree is short and wide — finding anyone takes at most 2 steps.</p>
+                    <div class="mini-tree">
+                        <svg viewBox="0 0 200 120">
+                            <line x1="100" y1="24" x2="50" y2="64" stroke="#00B894" stroke-width="2.5"/>
+                            <line x1="100" y1="24" x2="150" y2="64" stroke="#00B894" stroke-width="2.5"/>
+                            <line x1="150" y1="64" x2="175" y2="100" stroke="#00B894" stroke-width="2.5"/>
+                            <circle cx="100" cy="22" r="14" fill="#D4EDDA" stroke="#28A745" stroke-width="2"/><text x="100" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#155724">20</text>
+                            <circle cx="50" cy="62" r="13" fill="#D4EDDA" stroke="#28A745" stroke-width="2"/><text x="50" y="66" text-anchor="middle" font-size="11" font-weight="600" fill="#155724">10</text>
+                            <circle cx="150" cy="62" r="13" fill="#D4EDDA" stroke="#28A745" stroke-width="2"/><text x="150" y="66" text-anchor="middle" font-size="11" font-weight="600" fill="#155724">30</text>
+                            <circle cx="175" cy="98" r="12" fill="#D4EDDA" stroke="#28A745" stroke-width="2"/><text x="175" y="102" text-anchor="middle" font-size="10" font-weight="600" fill="#155724">40</text>
+                        </svg>
+                    </div>
+                    <p class="small-note">Fast. Even with a million students, max ~20 steps.</p>
+                </div>
+            </div>
+
+            <div class="next-strip">
+                <button class="btn-next" onclick="goTo('learn')">Cool — but how does it balance itself? →</button>
+            </div>
+        </section>
+
+        <!-- ======================== -->
+        <!-- SECTION 2: HOW IT WORKS  -->
+        <!-- ======================== -->
+        <section id="sec-learn" class="sec">
+            <div class="sec-top">
+                <h2>The tree checks two things after every change</h2>
+                <p>That's it. Two simple rules keep the entire tree balanced.</p>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="card-num">1</div>
+                    <h3>Height</h3>
+                    <p>Every node knows how tall its left and right branches are. A leaf has height 1. A parent's height = 1 + the taller child.</p>
+                </div>
+                <div class="card">
+                    <div class="card-num">2</div>
+                    <h3>Balance Factor</h3>
+                    <p>Take the left branch height, subtract the right branch height. If the answer is -1, 0, or +1 — the node is fine. If it's anything else, the tree fixes it immediately.</p>
+                </div>
+            </div>
+
+            <div class="fix-section">
+                <h3>How does it fix itself? Rotations.</h3>
+                <p>When a node gets too heavy on one side, the tree swaps a few pointers to redistribute the weight. There are 4 possible patterns:</p>
+
+                <div class="rot-grid">
+                    <div class="rot-item">
+                        <span class="rot-name">LL</span>
+                        <span class="rot-desc">Left side too heavy → rotate right</span>
+                        <button class="btn-try" onclick="runDemoInteractive('LL')">Watch it happen →</button>
+                    </div>
+                    <div class="rot-item">
+                        <span class="rot-name">RR</span>
+                        <span class="rot-desc">Right side too heavy → rotate left</span>
+                        <button class="btn-try" onclick="runDemoInteractive('RR')">Watch it happen →</button>
+                    </div>
+                    <div class="rot-item">
+                        <span class="rot-name">LR</span>
+                        <span class="rot-desc">Left-right zigzag → double rotation</span>
+                        <button class="btn-try" onclick="runDemoInteractive('LR')">Watch it happen →</button>
+                    </div>
+                    <div class="rot-item">
+                        <span class="rot-name">RL</span>
+                        <span class="rot-desc">Right-left zigzag → double rotation</span>
+                        <button class="btn-try" onclick="runDemoInteractive('RL')">Watch it happen →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="next-strip">
+                <button class="btn-next" onclick="goTo('play')">Alright, let me try it →</button>
+            </div>
+        </section>
+
+        <!-- ======================== -->
+        <!-- SECTION 3: TRY IT LIVE   -->
+        <!-- ======================== -->
+        <section id="sec-play" class="sec">
+            <div class="play-toolbar">
+                <button id="random-btn" class="btn-main">+ Add Random Student</button>
+                <div class="toolbar-demos">
+                    <button id="demo-btn" class="btn-pill">LL Demo</button>
+                    <button id="demo-rr-btn" class="btn-pill">RR Demo</button>
+                    <button id="demo-lr-btn" class="btn-pill">LR Demo</button>
+                    <button id="demo-rl-btn" class="btn-pill">RL Demo</button>
+                </div>
+                <button id="clear-btn" class="btn-pill btn-pill-red">Clear All</button>
+            </div>
+
+            <div class="play-grid">
+                <!-- LEFT: FORMS & TABLE -->
+                <div class="play-side">
+                    <div class="card">
+                        <h3>Add a student</h3>
+                        <form id="add-form">
+                            <input type="number" id="student-id" min="1" required placeholder="ID (e.g. 101)">
+                            <input type="text" id="student-name" required maxlength="100" placeholder="Name">
+                            <input type="number" id="student-marks" min="0" max="100" step="0.1" required placeholder="Marks (0–100)">
+                            <button type="submit" class="btn-main btn-full">Add to Tree</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Search by ID</h3>
+                        <div class="search-row">
+                            <input type="number" id="search-id" min="1" placeholder="Student ID...">
+                            <button id="search-btn" class="btn-dark">Find</button>
+                        </div>
+                        <div id="search-result" class="result-box hidden"></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header-row">
+                            <h3>All Students</h3>
+                            <span id="student-count" class="count-chip">0</span>
+                        </div>
+                        <div class="table-wrap">
+                            <table id="students-table">
+                                <thead><tr><th>ID</th><th>Name</th><th>Marks</th><th></th></tr></thead>
+                                <tbody id="students-tbody"></tbody>
+                            </table>
+                            <p id="empty-message" class="empty-msg">No students yet — add one above or hit <strong>+ Add Random Student</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: LIVE TREE -->
+                <div class="play-main">
+                    <div class="card tree-card">
+                        <div class="tree-card-top">
+                            <h3>Live Tree</h3>
+                            <div class="legend">
+                                <span class="dot-label"><span class="dot dot-green"></span>Balanced</span>
+                                <span class="dot-label"><span class="dot dot-amber"></span>Tilted (OK)</span>
+                                <span class="dot-label"><span class="dot dot-red"></span>Search path</span>
+                            </div>
+                        </div>
+                        <div id="rotation-info" class="rot-banner hidden"></div>
+                        <div id="tree-container" class="tree-area">
+                            <p id="tree-empty" class="empty-msg">Empty tree. Add a student to see it grow!</p>
+                            <svg id="tree-svg"></svg>
+                        </div>
+                        <div id="node-inspector" class="inspector hidden"></div>
+                        <div class="stats-row">
+                            <div class="stat"><span class="stat-num" id="stat-count">0</span><span class="stat-lbl">Students</span></div>
+                            <div class="stat"><span class="stat-num" id="stat-height">0</span><span class="stat-lbl">Height</span></div>
+                            <div class="stat"><span class="stat-num" id="stat-balanced">Yes</span><span class="stat-lbl">Balanced</span></div>
+                            <div class="stat"><span class="stat-num" id="stat-rotations">0</span><span class="stat-lbl">Rotations</span></div>
+                        </div>
+                        <div class="trav-row">
+                            <button class="btn-pill" onclick="showTraversal('inorder')">Inorder</button>
+                            <button class="btn-pill" onclick="showTraversal('preorder')">Preorder</button>
+                            <button class="btn-pill" onclick="showTraversal('postorder')">Postorder</button>
+                        </div>
+                        <div id="traversal-result" class="result-box hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="foot">
+        <p>TreeVault — ADSA Project · Hand-coded AVL Tree in Python + FastAPI</p>
+    </footer>
+
+    <script src="app.js?v=3"></script>
+</body>
+</html>
